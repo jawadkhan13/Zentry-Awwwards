@@ -3,10 +3,10 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { TiLocationArrow } from "react-icons/ti";
 import { useEffect, useRef, useState } from "react";
-import { Howl } from "howler";
 
 import Button from "./Button";
-// import VideoPreview from "./VideoPreview";
+import VideoPreview from "./VideoPreview";
+import { Howl } from "howler";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +14,7 @@ const hoverSound = new Howl({
   src: ["/audio/button-hover.wav"],
   volume: 0.5,
 });
+
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
@@ -40,7 +41,8 @@ const Hero = () => {
     setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
   };
 
-  useGSAP(() => {
+  useGSAP(
+    () => {
       if (hasClicked) {
         gsap.set("#next-video", { visibility: "visible" });
         gsap.to("#next-video", {
@@ -105,20 +107,22 @@ const Hero = () => {
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            <div
-              onClick={handleMiniVdClick}
-              className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-            >
-              <video
-                ref={nextVdRef}
-                src={getVideoSrc((currentIndex % totalVideos) + 1)}
-                loop
-                muted
-                id="current-video"
-                className="size-64 origin-center scale-150 object-cover object-center"
-                onLoadedData={handleVideoLoad}
-              />
-            </div>
+            <VideoPreview>
+              <div
+                onClick={handleMiniVdClick}
+                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+              >
+                <video
+                  ref={nextVdRef}
+                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
+                  loop
+                  muted
+                  id="current-video"
+                  className="size-64 origin-center scale-150 object-cover object-center"
+                  onLoadedData={handleVideoLoad}
+                />
+              </div>
+            </VideoPreview>
           </div>
 
           <video
@@ -134,7 +138,7 @@ const Hero = () => {
             src={getVideoSrc(
               currentIndex === totalVideos - 1 ? 1 : currentIndex
             )}
-            // autoPlay
+            autoPlay
             loop
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"

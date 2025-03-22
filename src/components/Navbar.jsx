@@ -27,6 +27,25 @@ const NavBar = () => {
     setIsIndicatorActive((prev) => !prev);
   };
 
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      if (!isAudioPlaying) {
+        setIsAudioPlaying(true);
+        setIsIndicatorActive(true);
+        audioElementRef.current.play().catch((error) => {
+          console.error("Audio play failed:", error);
+        });
+        // Remove event listener after first interaction
+        document.removeEventListener("click", handleUserInteraction);
+      }
+    };
+  
+    document.addEventListener("click", handleUserInteraction);
+  
+    return () => {
+      document.removeEventListener("click", handleUserInteraction);
+    };
+  }, []);
   // Manage audio playback
   useEffect(() => {
     if (isAudioPlaying) {
