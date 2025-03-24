@@ -3,7 +3,12 @@ import AnimatedTitle from './AnimatedTitle'
 import gsap from 'gsap';
 import RoundedCorners from './RoundedCorners';
 import Button from './Button';
+import { Howl } from "howler";
 
+const hoverSound = new Howl({
+  src: ["/audio/button-hover.wav"],
+  volume: 0.2,
+});
 const Story = () => {
     const frameRef = useRef('null');
 
@@ -86,6 +91,7 @@ const Story = () => {
               id="realm-btn"
               title="discover prologue"
               containerClass="mt-5"
+              onMouseEnter={() => hoverSound.play()}
             />
           </div>
         </div>  

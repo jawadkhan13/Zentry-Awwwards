@@ -12,9 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const hoverSound = new Howl({
   src: ["/audio/button-hover.wav"],
-  volume: 0.5,
+  volume: 0.2,
 });
-
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);

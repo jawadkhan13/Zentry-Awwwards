@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { useState, useRef, useEffect } from "react";
 
-export const VideoPreview = ({ children }) => {
+export const VideoPreview = ({  children }) => {
   const [isHovering, setIsHovering] = useState(false);
 
   const sectionRef = useRef(null); // Reference for the container section
@@ -56,6 +56,25 @@ export const VideoPreview = ({ children }) => {
       });
     }
   }, [isHovering]);
+
+//   useEffect(() => {
+//     if (isHovered) {
+//       gsap.to(sectionRef.current, {
+//         scale: 1,
+//         opacity: 1,
+//         duration: 0.7,
+//         ease: "power2.out",
+//       });
+//     } else {
+//       gsap.to(sectionRef.current, {
+//         scale: 0,
+//         opacity: 0,
+//         duration: 0.7,
+//         ease: "power2.in",
+//       });
+//     }
+//   }, [isHovered]);
+
 
   return (
     <section

@@ -1,5 +1,11 @@
 import AnimatedTitle from "./AnimatedTitle";
 import Button from "./Button";
+import { Howl } from "howler";
+
+const hoverSound = new Howl({
+  src: ["/audio/button-hover.wav"],
+  volume: 0.2,
+});
 
 const ImageClipBox = ({ src, clipClass }) => (
     <div className={clipClass}>
@@ -43,7 +49,7 @@ const Contact = () => {
             className="special-font !md:text-[6.2rem] w-full font-zentry !text-5xl !font-black !leading-[.9]"
           />
 
-          <Button title="contact us" containerClass="mt-10 cursor-pointer" />
+          <Button title="contact us" containerClass="mt-10 cursor-pointer" onMouseEnter={() => hoverSound.play()}/>
         </div>
       </div>
     </div>

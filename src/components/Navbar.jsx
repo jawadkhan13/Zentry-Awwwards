@@ -3,6 +3,12 @@ import gsap from "gsap";
 import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
+import { Howl } from "howler";
+
+const hoverSound = new Howl({
+  src: ["/audio/button-hover.wav"],
+  volume: 0.2,
+});
 
 import Button from "./Button";
 
@@ -97,7 +103,7 @@ const NavBar = () => {
               title="Products"
               rightIcon={<TiLocationArrow />}
               containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
-              onMouseEnter={()=> {}}
+              onMouseEnter={() => hoverSound.play()}
             />
           </div>
 
